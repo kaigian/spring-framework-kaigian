@@ -1,16 +1,16 @@
 package indi.kaigian.springframework.context.reader;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import indi.kaigian.springframework.beans.definition.BeanDefinition;
-import indi.kaigian.springframework.beans.definition.BeanDefinitionHolder;
-import indi.kaigian.springframework.beans.definition.GenericBeanDefinition;
 import indi.kaigian.springframework.beans.annotation.Component;
 import indi.kaigian.springframework.beans.annotation.Lazy;
 import indi.kaigian.springframework.beans.annotation.Scope;
+import indi.kaigian.springframework.beans.definition.BeanDefinition;
+import indi.kaigian.springframework.beans.definition.BeanDefinitionHolder;
+import indi.kaigian.springframework.beans.definition.GenericBeanDefinition;
 import indi.kaigian.springframework.beans.registry.BeanDefinitionRegistry;
 import indi.kaigian.springframework.core.utils.ClassUtils;
 import indi.kaigian.springframework.core.utils.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.beans.Introspector;
 import java.io.File;
@@ -119,8 +119,9 @@ public class ClassPathBeanDefinitionScanner {
                 if (!absolutePath.endsWith(".class")) {
                     continue;
                 }
-                String loadPath = absolutePath.substring(absolutePath.indexOf("target\\classes\\") + 15, absolutePath.length() - 6);
-                loadPath = loadPath.replace("\\", ".");
+                String loadPath = absolutePath.substring(
+                        absolutePath.indexOf("target/classes/") + 15, absolutePath.length() - 6);
+                loadPath = loadPath.replace("/", ".");
                 Class<?> clazz = null;
                 try {
                     clazz = classLoader.loadClass(loadPath);
